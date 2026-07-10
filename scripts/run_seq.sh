@@ -19,10 +19,10 @@ printf "i-k-j          "; ./matmul_seq   2000 0  1
 printf "i-k-j blocked  "; ./matmul_seq   2000 64 1
 echo
 
-echo "## Flag sweep  (n=5000, i-k-j, no blocking)"
+echo "## Flag sweep  (n=2000, i-k-j, no blocking)"
 for OPT in "-O0" "-O1" "-O2" "-O3" "-O3 $XHOST"; do
     $CC $OPT $STD matmul_seq.c -o matmul_seq
-    printf "%-16s " "$OPT"; ./matmul_seq 5000 0 1
+    printf "%-16s " "$OPT"; ./matmul_seq 2000 0 1
 done
 echo
 

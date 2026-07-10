@@ -9,7 +9,7 @@ cd "$(dirname "$0")/../mpi"
 if command -v mpiicx >/dev/null 2>&1; then MPICC=mpiicx; XHOST=${XHOST:--xHost};
 else                                       MPICC=mpicc;  XHOST=${XHOST:--march=native}; fi
 STD=-std=c11
-N=${N:-5000}; BLK=${BLK:-64}; MAXP=$(nproc)
+N=${N:-5000}; BLK=${BLK:-32}; MAXP=$(nproc)
 
 echo "# MPI wrapper: $MPICC ($($MPICC --version 2>/dev/null | head -1))"
 $MPICC -O3 $XHOST $STD          matmul_mpi.c -o matmul_mpi

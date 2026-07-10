@@ -8,7 +8,7 @@ cd "$(dirname "$0")/../omp"
 CC=${CC:-icx}; STD=-std=c11
 if [ "$CC" = "gcc" ]; then OMPF=-fopenmp; XHOST=${XHOST:--march=native};
 else                        OMPF=-qopenmp; XHOST=${XHOST:--xHost}; fi
-N=${N:-5000}; BLK=${BLK:-64}; MAXT=$(nproc)
+N=${N:-5000}; BLK=${BLK:-32}; MAXT=$(nproc)
 
 echo "# Compiler: $($CC --version 2>/dev/null | head -1)"
 $CC -O3 $XHOST $OMPF $STD matmul_omp.c -o matmul_omp

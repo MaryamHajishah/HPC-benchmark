@@ -1,0 +1,2 @@
+i-j-k -O0  n=2000 block=0 reps=1 | t_min=21.977958 s  t_med=21.977958 s | 0.73 GFLOP/s | max_err=0
+i-k-j -O0  n=2000 block=0 reps=1 | t_min=10.766064 s  t_med=10.766064 s | 1.49 GFLOP/s | max_err=0
