@@ -40,14 +40,14 @@ static int cmp_double(const void *pa, const void *pb) {
 
 /* Local kernel: C_local[rows][n] = A_local[rows][n] * B[n][n], i-k-j, optional blocking. */
 static void local_mult(int rows, int n, int bs,
-                       const double *A, const double *B, double *C) {
+                       const double *restrict A, const double *restrict B, double *restrict C) {
     memset(C, 0, (size_t)rows * n * sizeof(double));
     if (bs <= 0) {                                   /* plain i-k-j */
         for (int i = 0; i < rows; i++)
             for (int k = 0; k < n; k++) {
                 const double aik = A[(size_t)i * n + k];
-                const double *Brow = &B[(size_t)k * n];
-                double *Crow = &C[(size_t)i * n];
+                const double *restrict Brow = &B[(size_t)k * n];
+                double *restrict Crow = &C[(size_t)i * n];
                 for (int j = 0; j < n; j++)
                     Crow[j] += aik * Brow[j];
             }
@@ -61,8 +61,8 @@ static void local_mult(int rows, int n, int bs,
                     for (int i = ii; i < imax; i++)
                         for (int k = kk; k < kmax; k++) {
                             const double aik = A[(size_t)i * n + k];
-                            const double *Brow = &B[(size_t)k * n];
-                            double *Crow = &C[(size_t)i * n];
+                            const double *restrict Brow = &B[(size_t)k * n];
+                            double *restrict Crow = &C[(size_t)i * n];
                             for (int j = jj; j < jmax; j++)
                                 Crow[j] += aik * Brow[j];
                         }
