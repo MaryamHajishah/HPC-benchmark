@@ -1,8 +1,6 @@
 # HPC-benchmark — Parallelization of Matrix Multiplication (OpenMP · MPI · CUDA)
 
-Final project, High Performance Computing (Prof. D. D'Agostino, UniGe), 9 credits.
-
-We take the professor's sequential `C = A·B` (n×n doubles, `A=2`, `B=3`, so every
+We take the sequential `C = A·B` (n×n doubles, `A=2`, `B=3`, so every
 `C[i][j] == 6·n`) and make it fast three ways — **OpenMP** (multicore), **MPI**
 (multi-process) and **CUDA** (GPU) — always measuring speedup/efficiency against
 the **same best sequential time**. Grading is report-weighted: hot-spot analysis,
