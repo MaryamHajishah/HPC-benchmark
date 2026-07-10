@@ -13,7 +13,7 @@ Thread(s) per core:              2
 Core(s) per socket:              16
 Socket(s):                       1
 Stepping:                        2
-CPU(s) scaling MHz:              24%
+CPU(s) scaling MHz:              21%
 CPU max MHz:                     4020.0000
 CPU min MHz:                     800.0000
 BogoMIPS:                        6374.40
@@ -39,7 +39,7 @@ Vulnerability Tsx async abort:   Not affected
 
 ===================== Memory (free -h) ================
                total        used        free      shared  buff/cache   available
-Mem:            62Gi       2.8Gi        54Gi       357Mi       6.0Gi        59Gi
+Mem:            62Gi       2.7Gi        56Gi       368Mi       4.7Gi        59Gi
 Swap:             0B          0B          0B
 
 ===================== Cache / topology ================
@@ -82,8 +82,6 @@ Machine (63GB total)
         L1d L#14 (32KB) + L1i L#14 (64KB) + Core L#14 + PU L#22 (P#22)
         L1d L#15 (32KB) + L1i L#15 (64KB) + Core L#15 + PU L#23 (P#23)
   HostBridge
-    PCIBridge
-      PCI 01:00.0 (VGA)
     PCI 00:02.0 (VGA)
     PCI 00:0e.0 (RAID)
       Block(Disk) "nvme0n1"
@@ -98,8 +96,3 @@ Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721)
 icc (ICC) 2021.10.0 20230609
 gcc (Debian 12.2.0-14+deb12u1) 12.2.0
 Intel(R) MPI Library for Linux* OS, Version 2021.10 Build 20230619 (id: c2e19c2f3e)
-
-
-
-
-

@@ -1,0 +1,16 @@
+== sequential baseline n=15000 ==
+n=15000 block=0 reps=3 | t_min=264.632850 s  t_med=264.635152 s | 25.51 GFLOP/s | max_err=0
+n=15000 block=32 reps=3 | t_min=208.155467 s  t_med=208.175713 s | 32.43 GFLOP/s | max_err=0
+== OpenMP strong scaling n=15000 ==
+omp n=15000 block=32 threads=1 sched=static reps=3 | t_min=215.417319 s  t_med=215.638779 s | 31.33 GFLOP/s | max_err=0
+omp n=15000 block=32 threads=2 sched=static reps=3 | t_min=107.328479 s  t_med=107.417298 s | 62.89 GFLOP/s | max_err=0
+omp n=15000 block=32 threads=4 sched=static reps=3 | t_min=50.405742 s  t_med=50.459819 s | 133.91 GFLOP/s | max_err=0
+omp n=15000 block=32 threads=8 sched=static reps=3 | t_min=28.125686 s  t_med=30.707819 s | 239.99 GFLOP/s | max_err=0
+omp n=15000 block=32 threads=16 sched=static reps=3 | t_min=34.314437 s  t_med=34.718630 s | 196.71 GFLOP/s | max_err=0
+omp n=15000 block=32 threads=24 sched=static reps=3 | t_min=36.164172 s  t_med=36.252210 s | 186.65 GFLOP/s | max_err=0
+== MPI strong scaling n=15000 (P<=16; each rank copies B ~1.8GB) ==
+mpi n=15000 block=32 procs=1 mode=collective reps=3 | t_tot=446.880255 s (comm=0.206294 comp=446.673960, comm%=0.0) | 15.10 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=2 mode=collective reps=3 | t_tot=338.178174 s (comm=58.243462 comp=279.934711, comm%=17.2) | 19.96 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=4 mode=collective reps=3 | t_tot=112.462001 s (comm=0.902198 comp=111.559803, comm%=0.8) | 60.02 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=8 mode=collective reps=3 | t_tot=64.895632 s (comm=0.742326 comp=64.153306, comm%=1.1) | 104.01 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=16 mode=collective reps=3 | t_tot=47.671899 s (comm=3.096546 comp=44.575353, comm%=6.5) | 141.59 GFLOP/s | max_err=0
