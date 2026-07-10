@@ -1,0 +1,10 @@
+seq/matmul_seq
+seq/matmul_naive
+omp/matmul_omp
+mpi/matmul_mpi
+mpi/matmul_mpi_p2p
+cuda/matmul_cuda
+outputs/*
+!outputs/.gitkeep
+adv*/
+*.o
