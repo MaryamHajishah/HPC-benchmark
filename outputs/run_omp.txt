@@ -1,0 +1,25 @@
+# Compiler: Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721)
+# built matmul_omp | N=5000 default block=64 | cores available=24
+
+## 1) Thread scaling  (N=5000, block=64, schedule=static)  T=1,2,4,8,16,24
+omp n=5000 block=64 threads=1 sched=static reps=3 | t_min=8.775183 s  t_med=8.776559 s | 28.49 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=2 sched=static reps=3 | t_min=4.322168 s  t_med=4.324155 s | 57.84 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=4 sched=static reps=3 | t_min=2.150409 s  t_med=2.151019 s | 116.26 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=8 sched=static reps=3 | t_min=1.082522 s  t_med=1.082618 s | 230.94 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=16 sched=static reps=3 | t_min=1.191962 s  t_med=1.286555 s | 209.74 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=24 sched=static reps=3 | t_min=1.116096 s  t_med=1.165805 s | 224.00 GFLOP/s | max_err=0
+
+## 2) Block-size sweep  (N=5000, T=24, schedule=static)  block=0(no-block),32,64,128,256
+omp n=5000 block=0 threads=24 sched=static reps=3 | t_min=2.693718 s  t_med=2.716306 s | 92.81 GFLOP/s | max_err=0
+omp n=5000 block=32 threads=24 sched=static reps=3 | t_min=0.932617 s  t_med=0.967326 s | 268.06 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=24 sched=static reps=3 | t_min=1.089617 s  t_med=1.200361 s | 229.44 GFLOP/s | max_err=0
+omp n=5000 block=128 threads=24 sched=static reps=3 | t_min=1.097116 s  t_med=1.184969 s | 227.87 GFLOP/s | max_err=0
+omp n=5000 block=256 threads=24 sched=static reps=3 | t_min=1.064436 s  t_med=1.113421 s | 234.87 GFLOP/s | max_err=0
+
+## 3) Schedule sweep  (N=5000, T=24, block=64)  static / dynamic / guided
+omp n=5000 block=64 threads=24 sched=static reps=3 | t_min=1.126966 s  t_med=1.188679 s | 221.83 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=24 sched=dynamic reps=3 | t_min=1.071288 s  t_med=1.089699 s | 233.36 GFLOP/s | max_err=0
+omp n=5000 block=64 threads=24 sched=guided reps=3 | t_min=1.067978 s  t_med=1.085229 s | 234.09 GFLOP/s | max_err=0
+
+## Confirm winner bigger, e.g.:
+##   OMP_NUM_THREADS=24 OMP_SCHEDULE=<best> ./omp/matmul_omp 10000 <best_block> 5   (>> outputs/omp_confirm.txt 2>&1)

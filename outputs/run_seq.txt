@@ -1,0 +1,22 @@
+# Compiler: Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721)
+
+## Loop order  (n=2000): naive i-j-k vs cache-friendly i-k-j vs blocked
+i-j-k naive    n=2000 block=0 reps=1 | t_min=0.632703 s  t_med=0.632703 s | 25.29 GFLOP/s | max_err=0
+i-k-j          n=2000 block=0 reps=1 | t_min=0.632759 s  t_med=0.632759 s | 25.29 GFLOP/s | max_err=0
+i-k-j blocked  n=2000 block=64 reps=1 | t_min=0.636258 s  t_med=0.636258 s | 25.15 GFLOP/s | max_err=0
+
+## Flag sweep  (n=5000, i-k-j, no blocking)
+-O0              n=5000 block=0 reps=1 | t_min=173.634477 s  t_med=173.634477 s | 1.44 GFLOP/s | max_err=0
+-O1              n=5000 block=0 reps=1 | t_min=69.021028 s  t_med=69.021028 s | 3.62 GFLOP/s | max_err=0
+-O2              n=5000 block=0 reps=1 | t_min=50.466485 s  t_med=50.466485 s | 4.95 GFLOP/s | max_err=0
+-O3              n=5000 block=0 reps=1 | t_min=50.907188 s  t_med=50.907188 s | 4.91 GFLOP/s | max_err=0
+-O3 -xHost       n=5000 block=0 reps=1 | t_min=9.989560 s  t_med=9.989560 s | 25.03 GFLOP/s | max_err=0
+
+## Block-size sweep  (n=5000, -O3 -xHost)
+n=5000 block=0 reps=1 | t_min=10.052238 s  t_med=10.052238 s | 24.87 GFLOP/s | max_err=0
+n=5000 block=8 reps=1 | t_min=12.378448 s  t_med=12.378448 s | 20.20 GFLOP/s | max_err=0
+n=5000 block=16 reps=1 | t_min=7.889717 s  t_med=7.889717 s | 31.69 GFLOP/s | max_err=0
+n=5000 block=32 reps=1 | t_min=7.732878 s  t_med=7.732878 s | 32.33 GFLOP/s | max_err=0
+n=5000 block=64 reps=1 | t_min=10.216285 s  t_med=10.216285 s | 24.47 GFLOP/s | max_err=0
+
+## Confirm winner bigger, e.g.:  ./seq/matmul_seq 10000 <best_block> 5   (>> outputs/seq_confirm.txt 2>&1)

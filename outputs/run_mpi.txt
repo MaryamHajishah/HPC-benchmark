@@ -1,0 +1,23 @@
+# MPI wrapper: mpiicx (Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721))
+# built matmul_mpi (collective) and matmul_mpi_p2p | N=5000 block=64 | cores=24
+
+## 1) Process scaling (strong)  N=5000 block=64  P=1,2,4,8,16,24  [collectives]
+mpi n=5000 block=64 procs=1 mode=collective reps=3 | t_tot=14.260631 s (comm=0.022683 comp=14.237948, comm%=0.2) | 17.53 GFLOP/s | max_err=0
+mpi n=5000 block=64 procs=2 mode=collective reps=3 | t_tot=7.910601 s (comm=0.053115 comp=7.857486, comm%=0.7) | 31.60 GFLOP/s | max_err=0
+mpi n=5000 block=64 procs=4 mode=collective reps=3 | t_tot=3.585640 s (comm=0.037024 comp=3.548616, comm%=1.0) | 69.72 GFLOP/s | max_err=0
+mpi n=5000 block=64 procs=8 mode=collective reps=3 | t_tot=2.303061 s (comm=0.230023 comp=2.073038, comm%=10.0) | 108.55 GFLOP/s | max_err=0
+mpi n=5000 block=64 procs=16 mode=collective reps=3 | t_tot=2.621169 s (comm=0.273367 comp=2.347801, comm%=10.4) | 95.38 GFLOP/s | max_err=0
+mpi n=5000 block=64 procs=24 mode=collective reps=3 | t_tot=1.856748 s (comm=0.281596 comp=1.575152, comm%=15.2) | 134.64 GFLOP/s | max_err=0
+
+## 2) Collectives vs manual point-to-point  (N=5000, P=8)
+mpi n=5000 block=64 procs=8 mode=collective reps=3 | t_tot=2.220089 s (comm=0.196241 comp=2.023848, comm%=8.8) | 112.61 GFLOP/s | max_err=0
+mpi n=5000 block=64 procs=8 mode=p2p reps=3 | t_tot=1.963543 s (comm=0.072306 comp=1.891236, comm%=3.7) | 127.32 GFLOP/s | max_err=0
+
+## 3) Weak scaling (per-process work ~constant: n = 4000 * P^(1/3))  P=1,2,4,8
+mpi n=4000 block=64 procs=1 mode=collective reps=3 | t_tot=7.622775 s (comm=0.014537 comp=7.608238, comm%=0.2) | 16.79 GFLOP/s | max_err=0
+mpi n=5040 block=64 procs=2 mode=collective reps=3 | t_tot=7.495274 s (comm=0.095423 comp=7.399851, comm%=1.3) | 34.16 GFLOP/s | max_err=0
+mpi n=6350 block=64 procs=4 mode=collective reps=3 | t_tot=6.210528 s (comm=0.059640 comp=6.150888, comm%=1.0) | 82.46 GFLOP/s | max_err=0
+mpi n=8000 block=64 procs=8 mode=collective reps=3 | t_tot=9.470088 s (comm=0.565636 comp=8.904452, comm%=6.0) | 108.13 GFLOP/s | max_err=0
+
+## Confirm winner bigger, e.g.:
+##   mpirun -np 8 ./mpi/matmul_mpi 10000 <best_block> 3   (>> outputs/mpi_confirm.txt 2>&1)

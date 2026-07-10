@@ -1,0 +1,100 @@
+===================== CPU (lscpu) =====================
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Address sizes:                   46 bits physical, 48 bits virtual
+Byte Order:                      Little Endian
+CPU(s):                          24
+On-line CPU(s) list:             0-23
+Vendor ID:                       GenuineIntel
+Model name:                      12th Gen Intel(R) Core(TM) i9-12900K
+CPU family:                      6
+Model:                           151
+Thread(s) per core:              2
+Core(s) per socket:              16
+Socket(s):                       1
+Stepping:                        2
+CPU(s) scaling MHz:              24%
+CPU max MHz:                     4020.0000
+CPU min MHz:                     800.0000
+BogoMIPS:                        6374.40
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi umip pku ospke waitpkg gfni vaes vpclmulqdq tme rdpid movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities
+Virtualization:                  VT-x
+L1d cache:                       640 KiB (16 instances)
+L1i cache:                       768 KiB (16 instances)
+L2 cache:                        14 MiB (10 instances)
+L3 cache:                        30 MiB (1 instance)
+NUMA node(s):                    1
+NUMA node0 CPU(s):               0-23
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Not affected
+Vulnerability Mds:               Not affected
+Vulnerability Meltdown:          Not affected
+Vulnerability Mmio stale data:   Not affected
+Vulnerability Retbleed:          Not affected
+Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; Enhanced IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS SW sequence
+Vulnerability Srbds:             Not affected
+Vulnerability Tsx async abort:   Not affected
+
+===================== Memory (free -h) ================
+               total        used        free      shared  buff/cache   available
+Mem:            62Gi       2.8Gi        54Gi       357Mi       6.0Gi        59Gi
+Swap:             0B          0B          0B
+
+===================== Cache / topology ================
+Machine (63GB total)
+  Package L#0
+    NUMANode L#0 (P#0 63GB)
+    L3 L#0 (30MB)
+      L2 L#0 (1280KB) + L1d L#0 (48KB) + L1i L#0 (32KB) + Core L#0
+        PU L#0 (P#0)
+        PU L#1 (P#1)
+      L2 L#1 (1280KB) + L1d L#1 (48KB) + L1i L#1 (32KB) + Core L#1
+        PU L#2 (P#2)
+        PU L#3 (P#3)
+      L2 L#2 (1280KB) + L1d L#2 (48KB) + L1i L#2 (32KB) + Core L#2
+        PU L#4 (P#4)
+        PU L#5 (P#5)
+      L2 L#3 (1280KB) + L1d L#3 (48KB) + L1i L#3 (32KB) + Core L#3
+        PU L#6 (P#6)
+        PU L#7 (P#7)
+      L2 L#4 (1280KB) + L1d L#4 (48KB) + L1i L#4 (32KB) + Core L#4
+        PU L#8 (P#8)
+        PU L#9 (P#9)
+      L2 L#5 (1280KB) + L1d L#5 (48KB) + L1i L#5 (32KB) + Core L#5
+        PU L#10 (P#10)
+        PU L#11 (P#11)
+      L2 L#6 (1280KB) + L1d L#6 (48KB) + L1i L#6 (32KB) + Core L#6
+        PU L#12 (P#12)
+        PU L#13 (P#13)
+      L2 L#7 (1280KB) + L1d L#7 (48KB) + L1i L#7 (32KB) + Core L#7
+        PU L#14 (P#14)
+        PU L#15 (P#15)
+      L2 L#8 (2048KB)
+        L1d L#8 (32KB) + L1i L#8 (64KB) + Core L#8 + PU L#16 (P#16)
+        L1d L#9 (32KB) + L1i L#9 (64KB) + Core L#9 + PU L#17 (P#17)
+        L1d L#10 (32KB) + L1i L#10 (64KB) + Core L#10 + PU L#18 (P#18)
+        L1d L#11 (32KB) + L1i L#11 (64KB) + Core L#11 + PU L#19 (P#19)
+      L2 L#9 (2048KB)
+        L1d L#12 (32KB) + L1i L#12 (64KB) + Core L#12 + PU L#20 (P#20)
+        L1d L#13 (32KB) + L1i L#13 (64KB) + Core L#13 + PU L#21 (P#21)
+        L1d L#14 (32KB) + L1i L#14 (64KB) + Core L#14 + PU L#22 (P#22)
+        L1d L#15 (32KB) + L1i L#15 (64KB) + Core L#15 + PU L#23 (P#23)
+  HostBridge
+    PCIBridge
+      PCI 01:00.0 (VGA)
+    PCI 00:02.0 (VGA)
+    PCI 00:0e.0 (RAID)
+      Block(Disk) "nvme0n1"
+      Block(Removable Media Device) "sr0"
+    PCI 00:1f.6 (Ethernet)
+      Net "eno1"
+  CoProc(OpenCL) "opencl0d0"
+  CoProc(OpenCL) "opencl2d0"
+
+===================== Compilers =======================
+Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721)
+icc (ICC) 2021.10.0 20230609
+gcc (Debian 12.2.0-14+deb12u1) 12.2.0
+Intel(R) MPI Library for Linux* OS, Version 2021.10 Build 20230619 (id: c2e19c2f3e)
