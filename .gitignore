@@ -8,3 +8,11 @@ cuda/matmul_cuda
 !outputs/.gitkeep
 adv*/
 *.o
+seq/matmul_seq_O0
+seq/matmul_naive_O0
+
+# report / presentation material stays local (not pushed)
+report/*.docx
+report/*.pptx
+report/PRESENTATION-PREP.md
+report/figures/

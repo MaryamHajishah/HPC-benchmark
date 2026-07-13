@@ -1,0 +1,18 @@
+# GPU: Tesla T4  CC 7.5  SMs=40  globalMem=15.6 GB
+# reps=3  (report min kernel time; H2D shown once per precision)
+
+=== FP32 (float) ===
+cuda fp32   naive-b8       n=10000 | kernel=10044.038 ms | 199.12 GFLOP/s | H2D=171.543 ms | max_err=0
+cuda fp32   naive-b16      n=10000 | kernel=5508.756 ms | 363.06 GFLOP/s | H2D=171.543 ms | max_err=0
+cuda fp32   naive-b32      n=10000 | kernel=3943.219 ms | 507.20 GFLOP/s | H2D=171.543 ms | max_err=0
+cuda fp32   tiled-16       n=10000 | kernel=3212.285 ms | 622.61 GFLOP/s | H2D=171.543 ms | max_err=0
+cuda fp32   tiled-32       n=10000 | kernel=2420.763 ms | 826.19 GFLOP/s | H2D=171.543 ms | max_err=0
+cuda fp32   cublas         n=10000 | kernel=518.554 ms | 3856.88 GFLOP/s | H2D=171.543 ms | max_err=0
+
+=== FP64 (double) ===
+cuda fp64   naive-b8       n=10000 | kernel=18895.568 ms | 105.84 GFLOP/s | H2D=385.605 ms | max_err=0
+cuda fp64   naive-b16      n=10000 | kernel=11122.717 ms | 179.81 GFLOP/s | H2D=385.605 ms | max_err=0
+cuda fp64   naive-b32      n=10000 | kernel=13171.446 ms | 151.84 GFLOP/s | H2D=385.605 ms | max_err=0
+cuda fp64   tiled-16       n=10000 | kernel=9831.462 ms | 203.43 GFLOP/s | H2D=385.605 ms | max_err=0
+cuda fp64   tiled-32       n=10000 | kernel=8828.573 ms | 226.54 GFLOP/s | H2D=385.605 ms | max_err=0
+cuda fp64   cublas         n=10000 | kernel=8020.846 ms | 249.35 GFLOP/s | H2D=385.605 ms | max_err=0

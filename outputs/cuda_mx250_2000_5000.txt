@@ -1,0 +1,40 @@
+# ==== CUDA on laptop NVIDIA GeForce MX250 (sm_61) — backup/verification run ====
+# (report should use Colab T4 for n=10000; MX250 memory caps this at n<=5000 for FP64)
+
+# GPU: NVIDIA GeForce MX250  CC 6.1  SMs=3  globalMem=2.1 GB
+# reps=3  (report min kernel time; H2D shown once per precision)
+
+=== FP32 (float) ===
+cuda fp32   naive-b8       n=2000 | kernel=501.296 ms | 31.92 GFLOP/s | H2D=11.089 ms | max_err=0
+cuda fp32   naive-b16      n=2000 | kernel=333.375 ms | 47.99 GFLOP/s | H2D=11.089 ms | max_err=0
+cuda fp32   naive-b32      n=2000 | kernel=315.552 ms | 50.70 GFLOP/s | H2D=11.089 ms | max_err=0
+cuda fp32   tiled-16       n=2000 | kernel=129.703 ms | 123.36 GFLOP/s | H2D=11.089 ms | max_err=0
+cuda fp32   tiled-32       n=2000 | kernel=112.122 ms | 142.70 GFLOP/s | H2D=11.089 ms | max_err=0
+cuda fp32   cublas         n=2000 | kernel=16.649 ms | 961.01 GFLOP/s | H2D=11.089 ms | max_err=0
+
+=== FP64 (double) ===
+cuda fp64   naive-b8       n=2000 | kernel=623.241 ms | 25.67 GFLOP/s | H2D=21.499 ms | max_err=0
+cuda fp64   naive-b16      n=2000 | kernel=590.207 ms | 27.11 GFLOP/s | H2D=21.499 ms | max_err=0
+cuda fp64   naive-b32      n=2000 | kernel=622.218 ms | 25.71 GFLOP/s | H2D=21.499 ms | max_err=0
+cuda fp64   tiled-16       n=2000 | kernel=620.685 ms | 25.78 GFLOP/s | H2D=21.499 ms | max_err=0
+cuda fp64   tiled-32       n=2000 | kernel=613.821 ms | 26.07 GFLOP/s | H2D=21.499 ms | max_err=0
+cuda fp64   cublas         n=2000 | kernel=455.523 ms | 35.12 GFLOP/s | H2D=21.499 ms | max_err=0
+
+# GPU: NVIDIA GeForce MX250  CC 6.1  SMs=3  globalMem=2.1 GB
+# reps=2  (report min kernel time; H2D shown once per precision)
+
+=== FP32 (float) ===
+cuda fp32   naive-b8       n=5000 | kernel=10001.516 ms | 25.00 GFLOP/s | H2D=65.967 ms | max_err=0
+cuda fp32   naive-b16      n=5000 | kernel=7849.225 ms | 31.85 GFLOP/s | H2D=65.967 ms | max_err=0
+cuda fp32   naive-b32      n=5000 | kernel=6123.690 ms | 40.83 GFLOP/s | H2D=65.967 ms | max_err=0
+cuda fp32   tiled-16       n=5000 | kernel=2192.063 ms | 114.05 GFLOP/s | H2D=65.967 ms | max_err=0
+cuda fp32   tiled-32       n=5000 | kernel=1787.833 ms | 139.83 GFLOP/s | H2D=65.967 ms | max_err=0
+cuda fp32   cublas         n=5000 | kernel=323.909 ms | 771.82 GFLOP/s | H2D=65.967 ms | max_err=0
+
+=== FP64 (double) ===
+cuda fp64   naive-b8       n=5000 | kernel=11254.048 ms | 22.21 GFLOP/s | H2D=131.931 ms | max_err=0
+cuda fp64   naive-b16      n=5000 | kernel=9493.454 ms | 26.33 GFLOP/s | H2D=131.931 ms | max_err=0
+cuda fp64   naive-b32      n=5000 | kernel=9937.152 ms | 25.16 GFLOP/s | H2D=131.931 ms | max_err=0
+cuda fp64   tiled-16       n=5000 | kernel=10026.718 ms | 24.93 GFLOP/s | H2D=131.931 ms | max_err=0
+cuda fp64   tiled-32       n=5000 | kernel=9693.893 ms | 25.79 GFLOP/s | H2D=131.931 ms | max_err=0
+cuda fp64   cublas         n=5000 | kernel=7123.729 ms | 35.09 GFLOP/s | H2D=131.931 ms | max_err=0

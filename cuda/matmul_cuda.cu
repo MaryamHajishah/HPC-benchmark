@@ -24,8 +24,10 @@
 #include <cuda_runtime.h>
 #include <cublas_v2.h>
 
-#define CK(call) do { cudaError_t e=(call); if(e!=cudaSuccess){ \
-    fprintf(stderr,"CUDA error %s:%d: %s\n",__FILE__,__LINE__,cudaGetErrorString(e)); exit(1);}}while(0)
+/* error-check macro. Internal var is _ck (NOT 'e') so it never collides with the
+   cudaEvent_t variables named s/e that we pass into CK(...). */
+#define CK(call) do { cudaError_t _ck=(call); if(_ck!=cudaSuccess){ \
+    fprintf(stderr,"CUDA error %s:%d: %s\n",__FILE__,__LINE__,cudaGetErrorString(_ck)); exit(1);}}while(0)
 
 /* ---------- kernels ---------- */
 template <typename T>
@@ -58,6 +60,64 @@ __global__ void matmul_tiled(const T* A, const T* B, T* C, int n) {
     if (row < n && col < n) C[row * n + col] = acc;
 }
 
+/* Register-blocked (2D thread-tiling) kernel. Each thread computes a TM x TN
+   micro-tile of C held in REGISTERS. A BM x BK tile of A and BK x BN tile of B
+   are staged in shared memory; each K-step loads TM values of A and TN of B into
+   registers and does TM*TN FMAs -> reuse ratio (TM*TN)/(TM+TN) FMA per shared load,
+   which is how GotoBLAS/CUTLASS approach peak (Goto & van de Geijn; "How To Write
+   Fast Numerical Code"). Bounds are handled by zero-padding loads + guarded stores. */
+template <typename T, int BM, int BN, int BK, int TM, int TN>
+__global__ void matmul_reg(const T* A, const T* B, T* C, int n) {
+    __shared__ T As[BM][BK];
+    __shared__ T Bs[BK][BN];
+    const int blockRow = blockIdx.y * BM;
+    const int blockCol = blockIdx.x * BN;
+    const int threadCol = threadIdx.x;              /* 0 .. BN/TN-1 */
+    const int threadRow = threadIdx.y;              /* 0 .. BM/TM-1 */
+    const int nThreads  = (BM / TM) * (BN / TN);
+    const int tid       = threadRow * (BN / TN) + threadCol;
+
+    T acc[TM][TN];
+    #pragma unroll
+    for (int i = 0; i < TM; ++i)
+        #pragma unroll
+        for (int j = 0; j < TN; ++j) acc[i][j] = (T)0;
+
+    for (int kk = 0; kk < n; kk += BK) {
+        for (int idx = tid; idx < BM * BK; idx += nThreads) {
+            int r = idx / BK, c = idx % BK, gr = blockRow + r, gc = kk + c;
+            As[r][c] = (gr < n && gc < n) ? A[(size_t)gr * n + gc] : (T)0;
+        }
+        for (int idx = tid; idx < BK * BN; idx += nThreads) {
+            int r = idx / BN, c = idx % BN, gr = kk + r, gc = blockCol + c;
+            Bs[r][c] = (gr < n && gc < n) ? B[(size_t)gr * n + gc] : (T)0;
+        }
+        __syncthreads();
+        #pragma unroll
+        for (int k = 0; k < BK; ++k) {
+            T aReg[TM], bReg[TN];
+            #pragma unroll
+            for (int i = 0; i < TM; ++i) aReg[i] = As[threadRow * TM + i][k];
+            #pragma unroll
+            for (int j = 0; j < TN; ++j) bReg[j] = Bs[k][threadCol * TN + j];
+            #pragma unroll
+            for (int i = 0; i < TM; ++i)
+                #pragma unroll
+                for (int j = 0; j < TN; ++j) acc[i][j] += aReg[i] * bReg[j];
+        }
+        __syncthreads();
+    }
+    #pragma unroll
+    for (int i = 0; i < TM; ++i) {
+        int gr = blockRow + threadRow * TM + i;
+        #pragma unroll
+        for (int j = 0; j < TN; ++j) {
+            int gc = blockCol + threadCol * TN + j;
+            if (gr < n && gc < n) C[(size_t)gr * n + gc] = acc[i][j];
+        }
+    }
+}
+
 /* ---------- cuBLAS overloads (C = A*B, column-major; symmetric so orientation is moot) ---------- */
 static void gemm(cublasHandle_t h, int n, const float* A, const float* B, float* C) {
     float a = 1.f, b = 0.f;
@@ -71,9 +131,9 @@ static void gemm(cublasHandle_t h, int n, const double* A, const double* B, doub
 /* ---------- helpers ---------- */
 template <typename T>
 static double check(const T* C, int n) {          /* max|C - 6n| over the whole matrix */
-    double exp = 6.0 * n, maxe = 0.0;
+    double expected = 6.0 * n, maxe = 0.0;
     for (size_t t = 0; t < (size_t)n * n; ++t) {
-        double e = fabs((double)C[t] - exp);
+        double e = fabs((double)C[t] - expected);
         if (e > maxe) maxe = e;
     }
     return maxe;
@@ -102,7 +162,6 @@ static void run(int n, int reps, const char* tname) {
 
     auto finish = [&](const char* name, float best_ms) {
         CK(cudaMemcpy(hC, dC, bytes, cudaMemcpyDeviceToHost));
-        double d2h_and = 0; /* D2H timed once below via events would double count; report kernel only */
         printf("cuda %-6s %-14s n=%d | kernel=%.3f ms | %.2f GFLOP/s | H2D=%.3f ms | max_err=%.3g\n",
                tname, name, n, best_ms, gf / (best_ms / 1e3), h2d, check(hC, n));
     };
@@ -148,6 +207,32 @@ static void run(int n, int reps, const char* tname) {
             best = fminf(best, time_ms(s, e));
         }
         finish("tiled-32", best);
+    }
+
+    /* ---- register-blocked (2D thread-tiling): micro-tile 4x4 and 8x8 ---- */
+    {   /* 4x4: BM=BN=64, BK=8 -> 16x16=256 threads, 16 outputs/thread */
+        dim3 blk(16, 16), grd((n + 63) / 64, (n + 63) / 64);
+        float best = 1e30f;
+        for (int r = 0; r < reps; ++r) {
+            CK(cudaEventRecord(s));
+            matmul_reg<T, 64, 64, 8, 4, 4><<<grd, blk>>>(dA, dB, dC, n);
+            CK(cudaEventRecord(e)); CK(cudaEventSynchronize(e));
+            CK(cudaGetLastError());
+            best = fminf(best, time_ms(s, e));
+        }
+        finish("reg-4x4", best);
+    }
+    {   /* 8x8: BM=BN=128, BK=8 -> 16x16=256 threads, 64 outputs/thread */
+        dim3 blk(16, 16), grd((n + 127) / 128, (n + 127) / 128);
+        float best = 1e30f;
+        for (int r = 0; r < reps; ++r) {
+            CK(cudaEventRecord(s));
+            matmul_reg<T, 128, 128, 8, 8, 8><<<grd, blk>>>(dA, dB, dC, n);
+            CK(cudaEventRecord(e)); CK(cudaEventSynchronize(e));
+            CK(cudaGetLastError());
+            best = fminf(best, time_ms(s, e));
+        }
+        finish("reg-8x8", best);
     }
 
     /* ---- cuBLAS ---- */

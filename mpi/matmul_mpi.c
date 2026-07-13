@@ -38,7 +38,10 @@ static int cmp_double(const void *pa, const void *pb) {
     return (a > b) - (a < b);
 }
 
-/* Local kernel: C_local[rows][n] = A_local[rows][n] * B[n][n], i-k-j, optional blocking. */
+/* Local kernel: C_local[rows][n] = A_local[rows][n] * B[n][n], i-k-j, optional blocking.
+ * restrict: Aloc, B, Cloc are separate allocations that never overlap, so icx can
+ * vectorize the inner FMA. Without restrict, icx assumes they may alias and the kernel
+ * runs ~2x slower than the sequential/OpenMP versions (whose a/b/c are distinct VLAs). */
 static void local_mult(int rows, int n, int bs,
                        const double *restrict A, const double *restrict B, double *restrict C) {
     memset(C, 0, (size_t)rows * n * sizeof(double));
