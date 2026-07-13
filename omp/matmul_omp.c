@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Usage: %s n [block_size] [reps]\n", argv[0]);
         return 1;
     }
-    const int n    = atoi(argv[1]);
+    const int n    = 10000;
     const int bs   = (argc > 2) ? atoi(argv[2]) : 0;   /* 0 => no blocking */
     const int reps = (argc > 3) ? atoi(argv[3]) : 3;
     if (n <= 0 || reps <= 0) { fprintf(stderr, "invalid arguments\n"); return 1; }

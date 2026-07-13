@@ -1,0 +1,21 @@
+# MPI wrapper : mpiicx (Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721))
+# MPI runtime : Intel(R) MPI Library for Linux* OS, Version 2021.10 Build 20230619 (id: c2e19c2f3e)
+
+## Reference: sequential kernel, n=5000 block=32
+seq       : n=5000 block=32 reps=1 | t_min=7.760301 s  t_med=7.760301 s | 32.22 GFLOP/s | max_err=0
+
+## Test 1 — MPI binary run DIRECTLY (no mpirun): isolates the BUILD
+direct    : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.651835 s (comm=0.062311 comp=16.589524, comm%=0.4) | 15.01 GFLOP/s | max_err=0
+>> direct run is <70% of sequential (15.01 vs 32.22) => BUILD problem (Hypothesis A).
+>> what the wrapper really invokes:
+icx: error: unknown argument: '-show'
+>> rebuilding with explicit -xCORE-AVX2 ...
+rebuilt   : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.939075 s (comm=0.062169 comp=16.876906, comm%=0.4) | 14.76 GFLOP/s | max_err=0
+>> rebuild did NOT fix it (14.76 GFLOP/s) — investigate manually (see LAB-CHECKLIST-MPI.md) before trusting the runs below.
+
+## Test 2 — same binary under mpirun -np 1: isolates the LAUNCHER (pinning)
+mpirun    : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.794094 s (comm=0.062542 comp=16.731552, comm%=0.4) | 14.89 GFLOP/s | max_err=0
+pinned    : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.960752 s (comm=0.061990 comp=16.898762, comm%=0.4) | 14.74 GFLOP/s | max_err=0
+>> launcher looks fine (plain 14.89 vs pinned 14.74 vs direct 14.76 GFLOP/s).
+
+## Verdict summary:  seq=32.22  direct=14.76  mpirun=14.89  pinned=14.74  (GFLOP/s)

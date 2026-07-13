@@ -1,0 +1,7 @@
+# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2 | N=15000 block=32
+## Process scaling (strong)  N=15000 block=32  [collectives]
+mpi n=15000 block=32 procs=1 mode=collective reps=3 | t_tot=453.297873 s (comm=0.206165 comp=453.091708, comm%=0.0) | 14.89 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=2 mode=collective reps=3 | t_tot=225.823526 s (comm=0.397388 comp=225.426138, comm%=0.2) | 29.89 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=4 mode=collective reps=3 | t_tot=129.261904 s (comm=0.329053 comp=128.932850, comm%=0.3) | 52.22 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=8 mode=collective reps=3 | t_tot=71.139874 s (comm=0.765424 comp=70.374450, comm%=1.1) | 94.88 GFLOP/s | max_err=0
+mpi n=15000 block=32 procs=16 mode=collective reps=3 | t_tot=62.071816 s (comm=5.746670 comp=56.325146, comm%=9.3) | 108.75 GFLOP/s | max_err=0
