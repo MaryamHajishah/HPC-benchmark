@@ -1,7 +1,8 @@
-# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2 | N=15000 block=32
-## Process scaling (strong)  N=15000 block=32  [collectives]
-mpi n=15000 block=32 procs=1 mode=collective reps=3 | t_tot=453.297873 s (comm=0.206165 comp=453.091708, comm%=0.0) | 14.89 GFLOP/s | max_err=0
-mpi n=15000 block=32 procs=2 mode=collective reps=3 | t_tot=225.823526 s (comm=0.397388 comp=225.426138, comm%=0.2) | 29.89 GFLOP/s | max_err=0
-mpi n=15000 block=32 procs=4 mode=collective reps=3 | t_tot=129.261904 s (comm=0.329053 comp=128.932850, comm%=0.3) | 52.22 GFLOP/s | max_err=0
-mpi n=15000 block=32 procs=8 mode=collective reps=3 | t_tot=71.139874 s (comm=0.765424 comp=70.374450, comm%=1.1) | 94.88 GFLOP/s | max_err=0
-mpi n=15000 block=32 procs=16 mode=collective reps=3 | t_tot=62.071816 s (comm=5.746670 comp=56.325146, comm%=9.3) | 108.75 GFLOP/s | max_err=0
+# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2  | N=15000 block=0 (retuned)
+# NOTE: reps=2 (not 3) for this sweep only — lab-closure time constraint; min statistic unchanged
+## Process scaling (strong)  N=15000 block=0  [collectives, P<=16]
+mpi n=15000 block=0 procs=1 mode=collective reps=2 | t_tot=272.977175 s (comm=0.545012 comp=272.432163, comm%=0.2) | 24.73 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=2 mode=collective reps=2 | t_tot=131.075421 s (comm=0.726970 comp=130.348450, comm%=0.6) | 51.50 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=4 mode=collective reps=2 | t_tot=65.799310 s (comm=0.559913 comp=65.239397, comm%=0.9) | 102.58 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=8 mode=collective reps=2 | t_tot=40.565539 s (comm=3.403898 comp=37.161641, comm%=8.4) | 166.40 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=16 mode=collective reps=2 | t_tot=60.728859 s (comm=19.049412 comp=41.679446, comm%=31.4) | 111.15 GFLOP/s | max_err=0

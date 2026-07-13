@@ -203,3 +203,14 @@ mpi n=4000 block=0 procs=1 mode=collective reps=3 | t_tot=5.190960 s (comm=0.014
 mpi n=5040 block=0 procs=2 mode=collective reps=3 | t_tot=5.179258 s (comm=0.099022 comp=5.080236, comm%=1.9) | 49.44 GFLOP/s | max_err=0
 mpi n=6350 block=0 procs=4 mode=collective reps=3 | t_tot=4.359319 s (comm=0.058638 comp=4.300681, comm%=1.3) | 117.47 GFLOP/s | max_err=0
 mpi n=8000 block=0 procs=8 mode=collective reps=3 | t_tot=6.860292 s (comm=1.032987 comp=5.827305, comm%=15.1) | 149.26 GFLOP/s | max_err=0
+>> pushed (MPI n=10000 with retuned block=0)
+
+##### [18:18:19] 4/4  MPI n=15000 sweep (long — Ctrl-C safe, every finished line counts)
+# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2  | N=15000 block=0 (retuned)
+# NOTE: reps=2 (not 3) for this sweep only — lab-closure time constraint; min statistic unchanged
+## Process scaling (strong)  N=15000 block=0  [collectives, P<=16]
+mpi n=15000 block=0 procs=1 mode=collective reps=2 | t_tot=272.977175 s (comm=0.545012 comp=272.432163, comm%=0.2) | 24.73 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=2 mode=collective reps=2 | t_tot=131.075421 s (comm=0.726970 comp=130.348450, comm%=0.6) | 51.50 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=4 mode=collective reps=2 | t_tot=65.799310 s (comm=0.559913 comp=65.239397, comm%=0.9) | 102.58 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=8 mode=collective reps=2 | t_tot=40.565539 s (comm=3.403898 comp=37.161641, comm%=8.4) | 166.40 GFLOP/s | max_err=0
+mpi n=15000 block=0 procs=16 mode=collective reps=2 | t_tot=60.728859 s (comm=19.049412 comp=41.679446, comm%=31.4) | 111.15 GFLOP/s | max_err=0
