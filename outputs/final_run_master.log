@@ -1,0 +1,76 @@
+
+##### [17:28:44] 1/6  Kernel bisect with icx (no MPI): which source form is slow?
+# icx -O3 -xHost | Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721)
+# n=2000 block=32 reps=3 (min over reps reported)
+seqvla    n=2000 | t=   1.0441 s |   15.32 GFLOP/s | max_err=0
+mpiflat   n=2000 | t=   1.0386 s |   15.41 GFLOP/s | max_err=0
+mpivla    n=2000 | t=   1.0569 s |   15.14 GFLOP/s | max_err=0
+nomemset  n=2000 | t=   1.0385 s |   15.41 GFLOP/s | max_err=0
+# n=2000 block=0 reps=3 (min over reps reported)
+seqvla    n=2000 | t=   0.6238 s |   25.65 GFLOP/s | max_err=0
+mpiflat   n=2000 | t=   0.6255 s |   25.58 GFLOP/s | max_err=0
+mpivla    n=2000 | t=   0.6257 s |   25.57 GFLOP/s | max_err=0
+nomemset  n=2000 | t=   0.6242 s |   25.63 GFLOP/s | max_err=0
+
+##### [17:29:04] 2/6  A/B the REAL MPI binary: flat vs -DKERNEL_VLA (direct run, n=5000)
+flat : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.834615 s (comm=0.061481 comp=16.773134, comm%=0.4) | 14.85 GFLOP/s | max_err=0
+vla  : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.952179 s (comm=0.062041 comp=16.890138, comm%=0.4) | 14.75 GFLOP/s | max_err=0
+>> winner: flat (flat=14.85 vla=14.75 GFLOP/s) — kernel fixed: no
+>> verify under mpirun -np 1:
+mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.828510 s (comm=0.062033 comp=16.766477, comm%=0.4) | 14.86 GFLOP/s | max_err=0
+
+##### [17:29:57] 3/6  Kernel NOT fixed — skipping MPI re-runs (today's pre-fix data stands); collecting diagnostics instead
+## diagnostics for the unresolved half-speed kernel
+### wrapper invocation:
+icx: error: unknown argument: '-show'
+icx: error: unknown argument: '-compile_info'
+### bisect built with the MPI wrapper (tests the link-time hypothesis):
+# n=2000 block=32 reps=3 (min over reps reported)
+seqvla    n=2000 | t=   1.0819 s |   14.79 GFLOP/s | max_err=0
+mpiflat   n=2000 | t=   1.0658 s |   15.01 GFLOP/s | max_err=0
+mpivla    n=2000 | t=   1.0847 s |   14.75 GFLOP/s | max_err=0
+nomemset  n=2000 | t=   1.1454 s |   13.97 GFLOP/s | max_err=0
+### vectorization report of the flat kernel:
+fatal error: cannot open file '/dev/null.opt.yaml': Permission denied
+1 error generated.
+
+##### [17:30:11] 4/6  Clean sequential n=15000 baseline (last one was perturbed: 237 min vs 258 med)
+== clean sequential baseline n=15000, block=32, reps=3 ==
+n=15000 block=32 reps=3 | t_min=208.111881 s  t_med=208.112949 s | 32.43 GFLOP/s | max_err=0
+
+##### [17:40:37] 5/6  Advisor roofline (guarded; skipped automatically if advisor is missing/broken)
+Intel(R) Advisor Command Line Tool
+Copyright (C) 2009-2023 Intel Corporation. All rights reserved.
+advisor: Collection started. To stop the collection, either press CTRL-C or enter from another console window: advisor -r /home/nfs/S6180768/Desktop/HPC-benchmark/adv/e000/hs000 -command stop.
+n=5000 block=32 reps=1 | t_min=7.716853 s  t_med=7.716853 s | 32.40 GFLOP/s | max_err=0
+advisor: Collection stopped.
+advisor: Opening result  0 %                                                   advisor: Opening result  0 % Finalizing results                                advisor: Opening result  0 % Finalizing the result                             advisor: Opening result  0 % Clearing the database                             advisor: Opening result 10 % Clearing the database                             advisor: Opening result 10 % Loading raw data to the database                  advisor: Opening result 10 % Loading 'systemcollector-293395-wk001.sc' file    advisor: Opening result 19 % Loading 'systemcollector-293395-wk001.sc' file    advisor: Opening result 19 % Loading '293395-293400.0.trace' file              advisor: Opening result 19 % Updating precomputed scalar metrics               advisor: Opening result 21 % Updating precomputed scalar metrics               advisor: Opening result 21 % Processing profile metrics and debug information  advisor: Opening result 21 % Setting data model parameters                     advisor: Opening result 21 % Resolving module symbols                          advisor: Opening result 21 % Resolving information for `libc.so.6'             advisor: Opening result 21 % Resolving information for `matmul_seq'            advisor: Opening result 23 % Resolving information for `matmul_seq'            advisor: Opening result 25 % Resolving information for `matmul_seq'            advisor: Opening result 25 % Resolving bottom user stack information           advisor: Opening result 26 % Resolving bottom user stack information           advisor: Opening result 27 % Resolving bottom user stack information           advisor: Opening result 27 % Resolving thread name information                 advisor: Opening result 28 % Resolving thread name information                 advisor: Opening result 28 % Resolving call target names for dynamic code      advisor: Opening result 30 % Resolving call target names for dynamic code      advisor: Opening result 31 % Resolving call target names for dynamic code      advisor: Opening result 31 % Processing profile metrics and debug information  advisor: Opening result 34 % Processing profile metrics and debug information  advisor: Opening result 34 % Setting data model parameters                     advisor: Opening result 35 % Setting data model parameters                     advisor: Opening result 35 % Precomputing frequently used data                 advisor: Opening result 35 % Precomputing frequently used data                 advisor: Opening result 38 % Precomputing frequently used data                 advisor: Opening result 41 % Precomputing frequently used data                 advisor: Opening result 43 % Precomputing frequently used data                 advisor: Opening result 43 % Updating precomputed scalar metrics               advisor: Opening result 45 % Updating precomputed scalar metrics               advisor: Opening result 45 % Discarding redundant overtime data                advisor: Opening result 48 % Discarding redundant overtime data                advisor: Opening result 48 % Saving the result                                 advisor: Opening result 51 % Saving the result                                 advisor: Opening result 53 % Saving the result                                 advisor: Opening result 74 % Saving the result                                 advisor: Opening result 74 % Preparing data for display of survey call tree    advisor: Opening result 74 % Resolving module symbols                          advisor: Opening result 74 % Resolving information for dangling locations      advisor: Opening result 75 % Resolving information for dangling locations      advisor: Opening result 75 % Resolving bottom user stack information           advisor: Opening result 75 % Resolving thread name information                 advisor: Opening result 75 % Resolving call target names for dynamic code      advisor: Opening result 75 % Precomputing frequently used data                 advisor: Opening result 76 % Precomputing frequently used data                 advisor: Opening result 77 % Precomputing frequently used data                 advisor: Opening result 88 % Precomputing frequently used data                 advisor: Opening result 100 % Precomputing frequently used data                advisor: Opening result 100 % done                                             
+advisor: Preparing frequently used data  0 % done                              advisor: Preparing frequently used data  0 % done                              
+advisor: Preparing frequently used data 100 % done                             
+
+Program Elapsed Time: 7.82s
+
+CPU Time: 7.82s
+Time in 3 Vectorized Loops: 7.74s
+
+Intel(R) Advisor Command Line Tool
+Copyright (C) 2009-2023 Intel Corporation. All rights reserved.
+advisor: Opening result  0 %                                                   advisor: Opening result  0 % Preparing data for display of survey call tree    advisor: Opening result  2 % Preparing data for display of survey call tree    advisor: Opening result 25 % Preparing data for display of survey call tree    advisor: Opening result 25 % done                                              
+advisor: Preparing frequently used data  0 % done                              advisor: Preparing frequently used data  0 % done                              
+advisor: Preparing frequently used data 100 % done                             
+advisor: Collection started. To stop the collection, either press CTRL-C or enter from another console window: advisor -r /home/nfs/S6180768/Desktop/HPC-benchmark/adv/e000/trc000 -command stop.
+n=5000 block=32 reps=1 | t_min=24.751112 s  t_med=24.751112 s | 10.10 GFLOP/s | max_err=0
+advisor: Opening result  0 % done                                              advisor: Opening result  0 % Finalizing results                                advisor: Opening result  0 % Finalizing the result                             advisor: Opening result  0 % Loading raw data to the database                  advisor: Opening result  0 % Loading 'bandwidth_1783957251.hpc' file           advisor: Opening result 11 % Loading 'bandwidth_1783957251.hpc' file           advisor: Opening result 11 % Loading 'tripcounts_293770_0.tcs' file            advisor: Opening result 23 % Loading 'tripcounts_293770_0.tcs' file            advisor: Opening result 23 % Updating precomputed scalar metrics               advisor: Opening result 26 % Updating precomputed scalar metrics               advisor: Opening result 26 % Processing profile metrics and debug information  advisor: Opening result 26 % Setting data model parameters                     advisor: Opening result 26 % Resolving module symbols                          advisor: Opening result 26 % Resolving information for dangling locations      advisor: Opening result 28 % Resolving information for dangling locations      advisor: Opening result 41 % Resolving information for dangling locations      advisor: Opening result 41 % Processing profile metrics and debug information  advisor: Opening result 41 % Resolving FLOP information                        advisor: Opening result 45 % Resolving FLOP information                        advisor: Opening result 45 % Processing information for self instruction mix readvisor: Opening result 49 % Processing information for self instruction mix readvisor: Opening result 49 % Calculating function call count                   advisor: Opening result 52 % Calculating function call count                   advisor: Opening result 52 % Processing information for light dynamic instructiadvisor: Opening result 56 % Processing information for light dynamic instructiadvisor: Opening result 56 % Setting data model parameters                     advisor: Opening result 57 % Setting data model parameters                     advisor: Opening result 57 % Precomputing frequently used data                 advisor: Opening result 57 % Precomputing frequently used data                 advisor: Opening result 69 % Precomputing frequently used data                 advisor: Opening result 69 % Updating precomputed scalar metrics               advisor: Opening result 72 % Updating precomputed scalar metrics               advisor: Opening result 72 % Discarding redundant overtime data                advisor: Opening result 75 % Discarding redundant overtime data                advisor: Opening result 75 % Saving the result                                 advisor: Opening result 75 % Preparing data for display of survey call tree    advisor: Opening result 77 % Preparing data for display of survey call tree    advisor: Opening result 88 % Preparing data for display of survey call tree    advisor: Opening result 100 % Preparing data for display of survey call tree   advisor: Opening result 100 % done                                             
+advisor: Preparing frequently used data  0 % done                              advisor: Preparing frequently used data  0 % done                              
+advisor: Preparing frequently used data 100 % done                             
+
+Program Elapsed Time: 7.82s
+
+CPU Time: 7.82s
+Time in 3 Vectorized Loops: 7.74s
+GFLOPS: 32.00
+GINTOPS: 5.20
+
+advisor: Opening result  0 %                                                   advisor: Opening result  0 % Preparing data for display of survey call tree    advisor: Opening result  2 % Preparing data for display of survey call tree    advisor: Opening result 25 % Preparing data for display of survey call tree    advisor: Opening result 25 % done                                              
+advisor: Preparing frequently used data  0 % done                              advisor: Preparing frequently used data  0 % done                              
+advisor: Preparing frequently used data 100 % done                             >> roofline OK -> outputs/roofline.html (open at home, hover the big dot, screenshot)

@@ -1,0 +1,2 @@
+== clean sequential baseline n=15000, block=32, reps=3 ==
+n=15000 block=32 reps=3 | t_min=208.111881 s  t_med=208.112949 s | 32.43 GFLOP/s | max_err=0
