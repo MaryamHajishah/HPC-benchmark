@@ -143,11 +143,17 @@ def mpi_scaling(fname, n):
                 rows[p] = (float(m.group(5)), float(m.group(8)))  # t_tot, comm%
     return dict(sorted(rows.items()))
 
+def kernel_really_fixed(fname, n):
+    """A *_FIXED file counts as fixed only if its P=1 run matches the sequential
+    kernel speed (the 2026-07-13 session wrote pre-fix data into FIXED files)."""
+    d = mpi_scaling(fname, n)
+    return 1 in d and TSEQ[n] / d[1][0] > 0.8
+
 def fig_mpi_scaling():
     fixed10, fixed15 = "run_mpi_10000_FIXED.txt", "run_mpi_15000_FIXED.txt"
-    use_fixed = os.path.exists(os.path.join(OUT, fixed10))
+    use_fixed = kernel_really_fixed(fixed10, 10000)
     src10 = fixed10 if use_fixed else "run_mpi_10000_v2.txt"
-    src15 = fixed15 if os.path.exists(os.path.join(OUT, fixed15)) else "confirm_15000_b32.txt"
+    src15 = fixed15 if kernel_really_fixed(fixed15, 15000) else "confirm_15000_b32.txt"
     d10, d15 = mpi_scaling(src10, 10000), mpi_scaling(src15, 15000)
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 3.8))
     for d, n, c, mk in [(d10, 10000, C["mpi"], "o"), (d15, 15000, C["fp64"], "s")]:
@@ -220,7 +226,7 @@ def fig_grand():
     labels = ["seq -O0\n(naive)", "seq best\n(AVX2+b32)", "OpenMP\n8T", "MPI 16P\n[pre-fix]",
               "CUDA reg-8×8\nFP32", "cuBLAS\nFP32"]
     vals = [1.44, 32.46, 231.41, 125.81, 3021.27, 4272.51]
-    if os.path.exists(os.path.join(OUT, "run_mpi_10000_FIXED.txt")):
+    if kernel_really_fixed("run_mpi_10000_FIXED.txt", 10000):
         d = mpi_scaling("run_mpi_10000_FIXED.txt", 10000)
         if d:
             best_p = min(d, key=lambda p: d[p][0])

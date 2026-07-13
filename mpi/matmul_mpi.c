@@ -42,6 +42,43 @@ static int cmp_double(const void *pa, const void *pb) {
  * restrict: Aloc, B, Cloc are separate allocations that never overlap, so icx can
  * vectorize the inner FMA. Without restrict, icx assumes they may alias and the kernel
  * runs ~2x slower than the sequential/OpenMP versions (whose a/b/c are distinct VLAs). */
+#ifdef KERNEL_VLA
+/* Candidate fix for the remaining ~2x gap vs the sequential kernel under icx:
+ * identical loop-nest FORM to matmul_seq.c (VLA 2-D indexing, no per-k hoisted
+ * restrict pointers), so icx can apply the same outer-loop transformations
+ * (unroll-and-jam over k) it applies to the sequential nest.
+ * Build:  MPIXHOST=-xCORE-AVX2 mpiicx -O3 -xCORE-AVX2 -DKERNEL_VLA ...
+ * Select this ONLY if scripts/kernel_bisect.c shows mpivla fast and mpiflat slow. */
+static void local_mult(int rows, int n, int bs,
+                       const double *restrict A, const double *restrict B, double *restrict C) {
+    memset(C, 0, (size_t)rows * n * sizeof(double));
+    const double (*a)[n] = (const double (*)[n])A;
+    const double (*b)[n] = (const double (*)[n])B;
+    double (*c)[n] = (double (*)[n])C;
+    if (bs <= 0) {                                   /* plain i-k-j */
+        for (int i = 0; i < rows; i++)
+            for (int k = 0; k < n; k++) {
+                const double aik = a[i][k];
+                for (int j = 0; j < n; j++)
+                    c[i][j] += aik * b[k][j];
+            }
+    } else {                                         /* tiled i-k-j */
+        for (int ii = 0; ii < rows; ii += bs)
+            for (int kk = 0; kk < n; kk += bs)
+                for (int jj = 0; jj < n; jj += bs) {
+                    const int imax = ii + bs < rows ? ii + bs : rows;
+                    const int kmax = kk + bs < n ? kk + bs : n;
+                    const int jmax = jj + bs < n ? jj + bs : n;
+                    for (int i = ii; i < imax; i++)
+                        for (int k = kk; k < kmax; k++) {
+                            const double aik = a[i][k];
+                            for (int j = jj; j < jmax; j++)
+                                c[i][j] += aik * b[k][j];
+                        }
+                }
+    }
+}
+#else
 static void local_mult(int rows, int n, int bs,
                        const double *restrict A, const double *restrict B, double *restrict C) {
     memset(C, 0, (size_t)rows * n * sizeof(double));
@@ -72,6 +109,7 @@ static void local_mult(int rows, int n, int bs,
                 }
     }
 }
+#endif /* KERNEL_VLA */
 
 int main(int argc, char **argv) {
     MPI_Init(&argc, &argv);
