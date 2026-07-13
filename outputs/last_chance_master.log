@@ -214,3 +214,9 @@ mpi n=15000 block=0 procs=2 mode=collective reps=2 | t_tot=131.075421 s (comm=0.
 mpi n=15000 block=0 procs=4 mode=collective reps=2 | t_tot=65.799310 s (comm=0.559913 comp=65.239397, comm%=0.9) | 102.58 GFLOP/s | max_err=0
 mpi n=15000 block=0 procs=8 mode=collective reps=2 | t_tot=40.565539 s (comm=3.403898 comp=37.161641, comm%=8.4) | 166.40 GFLOP/s | max_err=0
 mpi n=15000 block=0 procs=16 mode=collective reps=2 | t_tot=60.728859 s (comm=19.049412 comp=41.679446, comm%=31.4) | 111.15 GFLOP/s | max_err=0
+>> pushed (MPI n=15000 with retuned block=0 — done)
+
+##### [18:37:19] ALL DONE (winner was  block=0 @ 0 GF/s). Screenshot with:
+   cat outputs/kernel_bisect_icx.txt
+   cat outputs/run_mpi_10000_FIXED.txt
+   cat outputs/run_mpi_15000_FIXED.txt
