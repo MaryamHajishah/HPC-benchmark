@@ -182,3 +182,24 @@ vla b=16 : mpi n=5000 block=16 procs=1 mode=collective reps=1 | t_tot=21.453881 
 vla b=24 : mpi n=5000 block=24 procs=1 mode=collective reps=1 | t_tot=19.538106 s (comm=0.063812 comp=19.474295, comm%=0.3) | 12.80 GFLOP/s | max_err=0
 vla b=32 : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.789384 s (comm=0.061306 comp=16.728078, comm%=0.4) | 14.89 GFLOP/s | max_err=0
 >> WINNER: variant=vla block=0 at 25.68 GFLOP/s (seq best is 32.2 b32 / 24.9 b0)
+>> pushed (bisect n=5000 + MPI block sweep (winner:  b=0 @ 0))
+
+##### [18:03:17] 3/4  MPI n=10000 sweep with variant= block=0  (~9-14 min)
+# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2  | N=10000 block=0 (empirically re-tuned; b32 pathological in this binary)
+## Process scaling (strong)  N=10000 block=0  [collectives]
+mpi n=10000 block=0 procs=1 mode=collective reps=3 | t_tot=77.000805 s (comm=0.090065 comp=76.910740, comm%=0.1) | 25.97 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=2 mode=collective reps=3 | t_tot=38.674455 s (comm=0.179704 comp=38.494751, comm%=0.5) | 51.71 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=4 mode=collective reps=3 | t_tot=19.601423 s (comm=0.220649 comp=19.380774, comm%=1.1) | 102.03 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=8 mode=collective reps=3 | t_tot=11.803620 s (comm=0.582487 comp=11.221132, comm%=4.9) | 169.44 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=16 mode=collective reps=3 | t_tot=18.150490 s (comm=6.134473 comp=12.016017, comm%=33.8) | 110.19 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=24 mode=collective reps=3 | t_tot=11.797536 s (comm=2.211195 comp=9.586341, comm%=18.7) | 169.53 GFLOP/s | max_err=0
+
+## Collectives vs point-to-point  (N=10000, P=8)
+mpi n=10000 block=0 procs=8 mode=collective reps=3 | t_tot=11.747030 s (comm=0.657366 comp=11.089665, comm%=5.6) | 170.26 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=8 mode=p2p reps=3 | t_tot=11.531311 s (comm=0.242578 comp=11.288733, comm%=2.1) | 173.44 GFLOP/s | max_err=0
+
+## Weak scaling (n = 4000 * P^(1/3))
+mpi n=4000 block=0 procs=1 mode=collective reps=3 | t_tot=5.190960 s (comm=0.014584 comp=5.176376, comm%=0.3) | 24.66 GFLOP/s | max_err=0
+mpi n=5040 block=0 procs=2 mode=collective reps=3 | t_tot=5.179258 s (comm=0.099022 comp=5.080236, comm%=1.9) | 49.44 GFLOP/s | max_err=0
+mpi n=6350 block=0 procs=4 mode=collective reps=3 | t_tot=4.359319 s (comm=0.058638 comp=4.300681, comm%=1.3) | 117.47 GFLOP/s | max_err=0
+mpi n=8000 block=0 procs=8 mode=collective reps=3 | t_tot=6.860292 s (comm=1.032987 comp=5.827305, comm%=15.1) | 149.26 GFLOP/s | max_err=0

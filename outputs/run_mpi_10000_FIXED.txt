@@ -1,20 +1,18 @@
-# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2 | N=10000 block=32 | cores=24
-# pinning: I_MPI_PIN_PROCESSOR_LIST=<unset> OMPI_bind=<unset>
+# MPI wrapper: mpiicx | flags: -O3 -xCORE-AVX2  | N=10000 block=0 (empirically re-tuned; b32 pathological in this binary)
+## Process scaling (strong)  N=10000 block=0  [collectives]
+mpi n=10000 block=0 procs=1 mode=collective reps=3 | t_tot=77.000805 s (comm=0.090065 comp=76.910740, comm%=0.1) | 25.97 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=2 mode=collective reps=3 | t_tot=38.674455 s (comm=0.179704 comp=38.494751, comm%=0.5) | 51.71 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=4 mode=collective reps=3 | t_tot=19.601423 s (comm=0.220649 comp=19.380774, comm%=1.1) | 102.03 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=8 mode=collective reps=3 | t_tot=11.803620 s (comm=0.582487 comp=11.221132, comm%=4.9) | 169.44 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=16 mode=collective reps=3 | t_tot=18.150490 s (comm=6.134473 comp=12.016017, comm%=33.8) | 110.19 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=24 mode=collective reps=3 | t_tot=11.797536 s (comm=2.211195 comp=9.586341, comm%=18.7) | 169.53 GFLOP/s | max_err=0
 
-## 1) Process scaling (strong)  N=10000 block=32  [collectives]
-mpi n=10000 block=32 procs=1 mode=collective reps=3 | t_tot=142.572798 s (comm=0.091117 comp=142.481681, comm%=0.1) | 14.03 GFLOP/s | max_err=0
-mpi n=10000 block=32 procs=2 mode=collective reps=3 | t_tot=71.154262 s (comm=0.175209 comp=70.979053, comm%=0.2) | 28.11 GFLOP/s | max_err=0
-mpi n=10000 block=32 procs=4 mode=collective reps=3 | t_tot=53.264890 s (comm=8.994858 comp=44.270032, comm%=16.9) | 37.55 GFLOP/s | max_err=0
-mpi n=10000 block=32 procs=8 mode=collective reps=3 | t_tot=28.222297 s (comm=4.828319 comp=23.393978, comm%=17.1) | 70.87 GFLOP/s | max_err=0
-mpi n=10000 block=32 procs=16 mode=collective reps=3 | t_tot=15.594932 s (comm=0.687065 comp=14.907866, comm%=4.4) | 128.25 GFLOP/s | max_err=0
-mpi n=10000 block=32 procs=24 mode=collective reps=3 | t_tot=21.140591 s (comm=6.153808 comp=14.986784, comm%=29.1) | 94.60 GFLOP/s | max_err=0
+## Collectives vs point-to-point  (N=10000, P=8)
+mpi n=10000 block=0 procs=8 mode=collective reps=3 | t_tot=11.747030 s (comm=0.657366 comp=11.089665, comm%=5.6) | 170.26 GFLOP/s | max_err=0
+mpi n=10000 block=0 procs=8 mode=p2p reps=3 | t_tot=11.531311 s (comm=0.242578 comp=11.288733, comm%=2.1) | 173.44 GFLOP/s | max_err=0
 
-## 2) Collectives vs point-to-point  (N=10000, P=8)
-mpi n=10000 block=32 procs=8 mode=collective reps=3 | t_tot=19.186149 s (comm=0.350744 comp=18.835405, comm%=1.8) | 104.24 GFLOP/s | max_err=0
-mpi n=10000 block=32 procs=8 mode=p2p reps=3 | t_tot=25.578700 s (comm=3.837219 comp=21.741481, comm%=15.0) | 78.19 GFLOP/s | max_err=0
-
-## 3) Weak scaling (per-process work ~constant: n = n1 * P^(1/3))
-mpi n=4000 block=32 procs=1 mode=collective reps=3 | t_tot=8.546954 s (comm=0.014563 comp=8.532391, comm%=0.2) | 14.98 GFLOP/s | max_err=0
-mpi n=5040 block=32 procs=2 mode=collective reps=3 | t_tot=8.757505 s (comm=0.043721 comp=8.713784, comm%=0.5) | 29.24 GFLOP/s | max_err=0
-mpi n=6350 block=32 procs=4 mode=collective reps=3 | t_tot=7.502466 s (comm=0.070606 comp=7.431860, comm%=0.9) | 68.26 GFLOP/s | max_err=0
-mpi n=8000 block=32 procs=8 mode=collective reps=3 | t_tot=10.465036 s (comm=0.213328 comp=10.251707, comm%=2.0) | 97.85 GFLOP/s | max_err=0
+## Weak scaling (n = 4000 * P^(1/3))
+mpi n=4000 block=0 procs=1 mode=collective reps=3 | t_tot=5.190960 s (comm=0.014584 comp=5.176376, comm%=0.3) | 24.66 GFLOP/s | max_err=0
+mpi n=5040 block=0 procs=2 mode=collective reps=3 | t_tot=5.179258 s (comm=0.099022 comp=5.080236, comm%=1.9) | 49.44 GFLOP/s | max_err=0
+mpi n=6350 block=0 procs=4 mode=collective reps=3 | t_tot=4.359319 s (comm=0.058638 comp=4.300681, comm%=1.3) | 117.47 GFLOP/s | max_err=0
+mpi n=8000 block=0 procs=8 mode=collective reps=3 | t_tot=6.860292 s (comm=1.032987 comp=5.827305, comm%=15.1) | 149.26 GFLOP/s | max_err=0
