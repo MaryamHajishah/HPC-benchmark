@@ -1,31 +1,5 @@
-# icx -O3 -xHost | Intel(R) oneAPI DPC++/C++ Compiler 2023.2.0 (2023.2.0.20230721)
-# n=2000 block=32 reps=3 (min over reps reported)
-seqvla    n=2000 | t=   1.0441 s |   15.32 GFLOP/s | max_err=0
-mpiflat   n=2000 | t=   1.0386 s |   15.41 GFLOP/s | max_err=0
-mpivla    n=2000 | t=   1.0569 s |   15.14 GFLOP/s | max_err=0
-nomemset  n=2000 | t=   1.0385 s |   15.41 GFLOP/s | max_err=0
-# n=2000 block=0 reps=3 (min over reps reported)
-seqvla    n=2000 | t=   0.6238 s |   25.65 GFLOP/s | max_err=0
-mpiflat   n=2000 | t=   0.6255 s |   25.58 GFLOP/s | max_err=0
-mpivla    n=2000 | t=   0.6257 s |   25.57 GFLOP/s | max_err=0
-nomemset  n=2000 | t=   0.6242 s |   25.63 GFLOP/s | max_err=0
-flat : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.834615 s (comm=0.061481 comp=16.773134, comm%=0.4) | 14.85 GFLOP/s | max_err=0
-vla  : mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.952179 s (comm=0.062041 comp=16.890138, comm%=0.4) | 14.75 GFLOP/s | max_err=0
->> winner: flat (flat=14.85 vla=14.75 GFLOP/s) — kernel fixed: no
-mpi n=5000 block=32 procs=1 mode=collective reps=1 | t_tot=16.828510 s (comm=0.062033 comp=16.766477, comm%=0.4) | 14.86 GFLOP/s | max_err=0
-## diagnostics for the unresolved half-speed kernel
-### wrapper invocation:
-icx: error: unknown argument: '-show'
-icx: error: unknown argument: '-compile_info'
-### bisect built with the MPI wrapper (tests the link-time hypothesis):
-# n=2000 block=32 reps=3 (min over reps reported)
-seqvla    n=2000 | t=   1.0819 s |   14.79 GFLOP/s | max_err=0
-mpiflat   n=2000 | t=   1.0658 s |   15.01 GFLOP/s | max_err=0
-mpivla    n=2000 | t=   1.0847 s |   14.75 GFLOP/s | max_err=0
-nomemset  n=2000 | t=   1.1454 s |   13.97 GFLOP/s | max_err=0
-### vectorization report of the flat kernel:
-fatal error: cannot open file '/dev/null.opt.yaml': Permission denied
-1 error generated.
+
+##### [17:54:43] 1/4  Bisect at n=5000 (where seq is known-fast at b32) + the n=2000 theory check  (~3 min)
 ## bisect n=5000 block=32 (real discriminating size)
 # n=5000 block=32 reps=1 (min over reps reported)
 seqvla    n=5000 | t=  16.5847 s |   15.07 GFLOP/s | max_err=0
@@ -196,6 +170,8 @@ n=2000 block=16 reps=1 | t_min=0.667038 s  t_med=0.667038 s | 23.99 GFLOP/s | ma
 ./matmul_seq.optrpt:                            remark #15475: --- begin vector loop cost summary ---
 ./matmul_seq.optrpt:                            remark #15477: vector cost: 3.187500 
 ./matmul_seq.optrpt:                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+
+##### [17:55:52] 2/4  Block-size sweep on the REAL MPI binary, flat and VLA variants  (~3 min)
 ## MPI-binary block sweep, n=5000, direct run
 flat b=0 : mpi n=5000 block=0 procs=1 mode=collective reps=1 | t_tot=9.758608 s (comm=0.061180 comp=9.697428, comm%=0.6) | 25.62 GFLOP/s | max_err=0
 flat b=16 : mpi n=5000 block=16 procs=1 mode=collective reps=1 | t_tot=20.995002 s (comm=0.062204 comp=20.932798, comm%=0.3) | 11.91 GFLOP/s | max_err=0

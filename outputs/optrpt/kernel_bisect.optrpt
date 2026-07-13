@@ -1,0 +1,869 @@
+Global optimization report for : main
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (145, 5)
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 4
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 4.000000 
+    remark #15477: vector cost: 1.937500 
+    remark #15478: estimated potential speedup: 2.031250 
+    remark #15309: vectorization support: normalized vectorization overhead 1.031250
+    remark #15482: vectorized math library calls: 0 
+    remark #15484: vector function calls: 0 
+    remark #15485: serialized function calls: 0
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 0 
+    remark #15451: unmasked unaligned unit stride stores: 2 
+    remark #15456: masked unaligned unit stride loads: 0 
+    remark #15457: masked unaligned unit stride stores: 0 
+    remark #15458: masked indexed (or gather) loads: 0 
+    remark #15459: masked indexed (or scatter) stores: 0 
+    remark #15462: unmasked indexed (or gather) loads: 0 
+    remark #15463: unmasked indexed (or scatter) stores: 0 
+    remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+    remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+    remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+    remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+    remark #15497: vector compress: 0 
+    remark #15498: vector expand: 0 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (145, 5)
+<Remainder loop for vectorization>
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (149, 15)
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (34, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (35, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (36, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (38, 21)
+                    remark #25423: Invariant If condition at line 39 hoisted out of this loop
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (39, 25)
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (41, 29)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.750000 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (41, 29)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (28, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (29, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (31, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (28, 9)
+                    remark #25566: blocked by 64
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (29, 13)
+                        remark #25566: blocked by 64
+                        remark #25540: Loop unrolled and jammed by 8
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (31, 17)
+                            remark #25566: blocked by 64
+                            remark #25563: Load hoisted out of the loop
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 51.000000 
+                            remark #15477: vector cost: 15.000000 
+                            remark #15478: estimated potential speedup: 3.390625 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.125000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 16 
+                            remark #15451: unmasked unaligned unit stride stores: 8 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (31, 17)
+                        <Remainder loop for vectorization>
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+                    LOOP END
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (29, 13)
+                    <Remainder loop>
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (31, 17)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.781250 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (31, 17)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+    remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #25439: Loop unrolled with remainder by 8
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+<Remainder loop>
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (152, 15)
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (60, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (61, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (62, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (64, 21)
+                    remark #25423: Invariant If condition at line 65 hoisted out of this loop
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (65, 25)
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (69, 29)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.750000 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (69, 29)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (52, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (53, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (57, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (52, 9)
+                    remark #25566: blocked by 64
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (53, 13)
+                        remark #25566: blocked by 64
+                        remark #25540: Loop unrolled and jammed by 8
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (57, 17)
+                            remark #25566: blocked by 64
+                            remark #25563: Load hoisted out of the loop
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 51.000000 
+                            remark #15477: vector cost: 15.000000 
+                            remark #15478: estimated potential speedup: 3.390625 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.125000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 16 
+                            remark #15451: unmasked unaligned unit stride stores: 8 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (57, 17)
+                        <Remainder loop for vectorization>
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+                    LOOP END
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (53, 13)
+                    <Remainder loop>
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (57, 17)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.781250 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (57, 17)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+    remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #25439: Loop unrolled with remainder by 8
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+<Remainder loop>
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (154, 15)
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (89, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (90, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (91, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (93, 21)
+                    remark #25423: Invariant If condition at line 94 hoisted out of this loop
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (94, 25)
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (96, 29)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.750000 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (96, 29)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (83, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (84, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (86, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (83, 9)
+                    remark #25566: blocked by 64
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (84, 13)
+                        remark #25566: blocked by 64
+                        remark #25540: Loop unrolled and jammed by 8
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (86, 17)
+                            remark #25566: blocked by 64
+                            remark #25563: Load hoisted out of the loop
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 51.000000 
+                            remark #15477: vector cost: 15.000000 
+                            remark #15478: estimated potential speedup: 3.390625 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.125000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 16 
+                            remark #15451: unmasked unaligned unit stride stores: 8 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (86, 17)
+                        <Remainder loop for vectorization>
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+                    LOOP END
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (84, 13)
+                    <Remainder loop>
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (86, 17)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.781250 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (86, 17)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+    remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #25439: Loop unrolled with remainder by 8
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+<Remainder loop>
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (156, 15)
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (114, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (115, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (116, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (118, 21)
+                    remark #25423: Invariant If condition at line 119 hoisted out of this loop
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (119, 25)
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (123, 29)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.750000 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (123, 29)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+
+    LOOP BEGIN at ../../scripts/kernel_bisect.c (106, 9)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../scripts/kernel_bisect.c (107, 13)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../scripts/kernel_bisect.c (111, 17)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../scripts/kernel_bisect.c (106, 9)
+                    remark #25566: blocked by 64
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (107, 13)
+                        remark #25566: blocked by 64
+                        remark #25540: Loop unrolled and jammed by 8
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (111, 17)
+                            remark #25566: blocked by 64
+                            remark #25563: Load hoisted out of the loop
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 51.000000 
+                            remark #15477: vector cost: 15.000000 
+                            remark #15478: estimated potential speedup: 3.390625 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.125000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 16 
+                            remark #15451: unmasked unaligned unit stride stores: 8 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (111, 17)
+                        <Remainder loop for vectorization>
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+                    LOOP END
+
+                    LOOP BEGIN at ../../scripts/kernel_bisect.c (107, 13)
+                    <Remainder loop>
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (111, 17)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.781250 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../scripts/kernel_bisect.c (111, 17)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+    remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #15346: vector dependence: assumed FLOW dependence between (132:44) and (132:44) 
+    remark #25439: Loop unrolled with remainder by 8
+LOOP END
+
+LOOP BEGIN at ../../scripts/kernel_bisect.c (131, 5)
+<Remainder loop>
+LOOP END
+=================================================================
+
+---- Begin Inlining Report ----
+Option Values:
+  inline-threshold: 225
+  inlinehint-threshold: 325
+  inlinecold-threshold: 45
+  inlineoptsize-threshold: 15
+
+DEAD STATIC FUNC: atoi
+
+DEAD STATIC FUNC: fprintf
+
+DEAD STATIC FUNC: k_mpiflat
+
+DEAD STATIC FUNC: k_mpivla
+
+DEAD STATIC FUNC: k_nomemset
+
+DEAD STATIC FUNC: k_seqvla
+
+DEAD STATIC FUNC: report
+
+DEAD STATIC FUNC: wtime
+
+COMPILE FUNC: main
+   -> INLINE: atoi ../../scripts/kernel_bisect.c (140,33) (10<=487)
+      -> EXTERN: strtol ../../scripts/kernel_bisect.c (364,16)
+   -> INLINE: atoi ../../scripts/kernel_bisect.c (141,33) (10<=487)
+      -> EXTERN: strtol ../../scripts/kernel_bisect.c (364,16)
+   -> INLINE: atoi ../../scripts/kernel_bisect.c (142,33) (10<=487)
+      -> EXTERN: strtol ../../scripts/kernel_bisect.c (364,16)
+   -> EXTERN: malloc ../../scripts/kernel_bisect.c (143,17)
+   -> EXTERN: malloc ../../scripts/kernel_bisect.c (143,45)
+   -> EXTERN: malloc ../../scripts/kernel_bisect.c (143,73)
+   -> DELETE: fprintf ../../scripts/kernel_bisect.c (144,27)
+   -> EXTERN: printf ../../scripts/kernel_bisect.c (146,5)
+   -> INLINE: report ../../scripts/kernel_bisect.c (151,66) (145<=250)
+      -> EXTERN: printf ../../scripts/kernel_bisect.c (134,5)
+      -> EXTERN: fflush ../../scripts/kernel_bisect.c (136,5)
+      -> DELETE: llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.umax.i64 ../../scripts/kernel_bisect.c (131,5)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+   -> llvm.memset.p0.i64 ../../scripts/kernel_bisect.c (149,48)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (150,19) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: k_seqvla ../../scripts/kernel_bisect.c (150,28) (-14735<=250)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (151,18) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: report ../../scripts/kernel_bisect.c (153,69) (145<=250)
+      -> EXTERN: printf ../../scripts/kernel_bisect.c (134,5)
+      -> EXTERN: fflush ../../scripts/kernel_bisect.c (136,5)
+      -> DELETE: llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.umax.i64 ../../scripts/kernel_bisect.c (131,5)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (152,58) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: k_mpiflat ../../scripts/kernel_bisect.c (153,9) (-14685<=250)
+      -> llvm.memset.p0.i64 ../../scripts/kernel_bisect.c (50,5)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (153,43) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: report ../../scripts/kernel_bisect.c (155,69) (145<=250)
+      -> EXTERN: printf ../../scripts/kernel_bisect.c (134,5)
+      -> EXTERN: fflush ../../scripts/kernel_bisect.c (136,5)
+      -> DELETE: llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.umax.i64 ../../scripts/kernel_bisect.c (131,5)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (154,58) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: k_mpivla ../../scripts/kernel_bisect.c (155,9) (-14695<=250)
+      -> llvm.memset.p0.i64 ../../scripts/kernel_bisect.c (78,5)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (155,43) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: report ../../scripts/kernel_bisect.c (158,67) (-14855<=250)
+      -> EXTERN: printf ../../scripts/kernel_bisect.c (134,5)
+      -> EXTERN: fflush ../../scripts/kernel_bisect.c (136,5)
+      -> DELETE: llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.umax.i64 ../../scripts/kernel_bisect.c (131,5)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+      -> llvm.fabs.f64 ../../scripts/kernel_bisect.c (132,20)
+   -> llvm.memset.p0.i64 ../../scripts/kernel_bisect.c (156,48)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (157,19) (45<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> INLINE: k_nomemset ../../scripts/kernel_bisect.c (157,28) (-14700<=250)
+   -> INLINE: wtime ../../scripts/kernel_bisect.c (158,18) (-14955<=375)
+      -> EXTERN: clock_gettime ../../scripts/kernel_bisect.c (22,48)
+   -> EXTERN: fwrite ../../scripts/kernel_bisect.c (144,27)
+   -> llvm.umax.i64 ../../scripts/kernel_bisect.c (145,5)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (153,9)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (153,9)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (153,9)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (155,9)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (155,9)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (155,9)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (157,28)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (157,28)
+   -> llvm.experimental.noalias.scope.decl ../../scripts/kernel_bisect.c (157,28)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (39,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (39,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (41,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (41,29)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (41,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (41,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (140,22)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (65,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (65,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (69,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (69,29)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (69,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (69,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (140,22)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (94,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (94,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (96,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (96,29)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (96,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (96,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (140,22)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (119,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (119,25)
+   -> llvm.smax.i64 ../../scripts/kernel_bisect.c (123,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (123,29)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (123,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (123,48)
+   -> DELETE: llvm.smax.i64 ../../scripts/kernel_bisect.c (140,22)
+
+---- End Inlining Report ------

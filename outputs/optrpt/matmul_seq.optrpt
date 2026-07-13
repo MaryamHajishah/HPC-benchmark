@@ -1,0 +1,322 @@
+Global optimization report for : main
+
+LOOP BEGIN at ../../seq/matmul_seq.c (66, 5)
+    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+    LOOP BEGIN at ../../seq/matmul_seq.c (67, 9)
+        remark #15300: LOOP WAS VECTORIZED
+        remark #15305: vectorization support: vector length 4
+        remark #15475: --- begin vector loop cost summary ---
+        remark #15476: scalar cost: 5.000000 
+        remark #15477: vector cost: 2.187500 
+        remark #15478: estimated potential speedup: 2.234375 
+        remark #15309: vectorization support: normalized vectorization overhead 0.906250
+        remark #15482: vectorized math library calls: 0 
+        remark #15484: vector function calls: 0 
+        remark #15485: serialized function calls: 0
+        remark #15488: --- end vector loop cost summary ---
+        remark #15447: --- begin vector loop memory reference summary ---
+        remark #15450: unmasked unaligned unit stride loads: 0 
+        remark #15451: unmasked unaligned unit stride stores: 2 
+        remark #15456: masked unaligned unit stride loads: 0 
+        remark #15457: masked unaligned unit stride stores: 0 
+        remark #15458: masked indexed (or gather) loads: 0 
+        remark #15459: masked indexed (or scatter) stores: 0 
+        remark #15462: unmasked indexed (or gather) loads: 0 
+        remark #15463: unmasked indexed (or scatter) stores: 0 
+        remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+        remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+        remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+        remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+        remark #15497: vector compress: 0 
+        remark #15498: vector expand: 0 
+        remark #15474: --- end vector loop memory reference summary ---
+    LOOP END
+
+    LOOP BEGIN at ../../seq/matmul_seq.c (67, 9)
+    <Remainder loop for vectorization>
+    LOOP END
+LOOP END
+
+LOOP BEGIN at ../../seq/matmul_seq.c (71, 5)
+
+    LOOP BEGIN at ../../seq/matmul_seq.c (92, 13)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../seq/matmul_seq.c (93, 17)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../seq/matmul_seq.c (94, 21)
+            <Predicate Optimized v1>
+                remark #25423: Invariant If condition at line 99 hoisted out of this loop
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../seq/matmul_seq.c (98, 25)
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../seq/matmul_seq.c (99, 29)
+                        remark #25540: Loop unrolled and jammed by 8
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (101, 33)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 51.000000 
+                            remark #15477: vector cost: 15.000000 
+                            remark #15478: estimated potential speedup: 3.312500 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.125000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 16 
+                            remark #15451: unmasked unaligned unit stride stores: 8 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (101, 33)
+                        <Remainder loop for vectorization>
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+                    LOOP END
+
+                    LOOP BEGIN at ../../seq/matmul_seq.c (99, 29)
+                    <Remainder loop>
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (101, 33)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.750000 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (101, 33)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+
+            LOOP BEGIN at ../../seq/matmul_seq.c (94, 21)
+            <Predicate Optimized v2>
+
+                LOOP BEGIN at ../../seq/matmul_seq.c (98, 25)
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+
+    LOOP BEGIN at ../../seq/matmul_seq.c (85, 13)
+        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+        LOOP BEGIN at ../../seq/matmul_seq.c (86, 17)
+            remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+            LOOP BEGIN at ../../seq/matmul_seq.c (88, 21)
+                remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                LOOP BEGIN at ../../seq/matmul_seq.c (85, 13)
+                    remark #25566: blocked by 64
+                    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                    LOOP BEGIN at ../../seq/matmul_seq.c (86, 17)
+                        remark #25566: blocked by 64
+                        remark #25540: Loop unrolled and jammed by 8
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (88, 21)
+                            remark #25566: blocked by 64
+                            remark #25563: Load hoisted out of the loop
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 51.000000 
+                            remark #15477: vector cost: 15.000000 
+                            remark #15478: estimated potential speedup: 3.390625 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.125000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 16 
+                            remark #15451: unmasked unaligned unit stride stores: 8 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (88, 21)
+                        <Remainder loop for vectorization>
+                            remark #25583: Number of Array Refs Scalar Replaced In Loop: 14
+                        LOOP END
+                    LOOP END
+
+                    LOOP BEGIN at ../../seq/matmul_seq.c (86, 17)
+                    <Remainder loop>
+                        remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (88, 21)
+                            remark #15300: LOOP WAS VECTORIZED
+                            remark #15305: vectorization support: vector length 4
+                            remark #15475: --- begin vector loop cost summary ---
+                            remark #15476: scalar cost: 9.000000 
+                            remark #15477: vector cost: 3.187500 
+                            remark #15478: estimated potential speedup: 2.781250 
+                            remark #15309: vectorization support: normalized vectorization overhead 0.625000
+                            remark #15482: vectorized math library calls: 0 
+                            remark #15484: vector function calls: 0 
+                            remark #15485: serialized function calls: 0
+                            remark #15488: --- end vector loop cost summary ---
+                            remark #15447: --- begin vector loop memory reference summary ---
+                            remark #15450: unmasked unaligned unit stride loads: 2 
+                            remark #15451: unmasked unaligned unit stride stores: 1 
+                            remark #15456: masked unaligned unit stride loads: 0 
+                            remark #15457: masked unaligned unit stride stores: 0 
+                            remark #15458: masked indexed (or gather) loads: 0 
+                            remark #15459: masked indexed (or scatter) stores: 0 
+                            remark #15462: unmasked indexed (or gather) loads: 0 
+                            remark #15463: unmasked indexed (or scatter) stores: 0 
+                            remark #15554: Unmasked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15555: Masked VLS-optimized loads (each part of the group counted separately): 0
+                            remark #15556: Unmasked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15557: Masked VLS-optimized stores (each part of the group counted separately): 0
+                            remark #15497: vector compress: 0 
+                            remark #15498: vector expand: 0 
+                            remark #15474: --- end vector loop memory reference summary ---
+                        LOOP END
+
+                        LOOP BEGIN at ../../seq/matmul_seq.c (88, 21)
+                        <Remainder loop for vectorization>
+                        LOOP END
+                    LOOP END
+                LOOP END
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+
+LOOP BEGIN at ../../seq/matmul_seq.c (113, 5)
+    remark #15553: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+    LOOP BEGIN at ../../seq/matmul_seq.c (114, 9)
+        remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+        remark #15346: vector dependence: assumed FLOW dependence between (116:17) and (116:17) 
+        remark #15346: vector dependence: assumed FLOW dependence between (116:17) and (116:17) 
+        remark #25439: Loop unrolled with remainder by 8
+    LOOP END
+
+    LOOP BEGIN at ../../seq/matmul_seq.c (114, 9)
+    <Remainder loop>
+    LOOP END
+LOOP END
+=================================================================
+
+Global optimization report for : cmp_double
+=================================================================
+
+---- Begin Inlining Report ----
+Option Values:
+  inline-threshold: 225
+  inlinehint-threshold: 325
+  inlinecold-threshold: 45
+  inlineoptsize-threshold: 15
+
+DEAD STATIC FUNC: atoi
+
+DEAD STATIC FUNC: wtime
+
+COMPILE FUNC: main
+   -> EXTERN: fprintf ../../seq/matmul_seq.c (48,9)
+   -> INLINE: atoi ../../seq/matmul_seq.c (51,22) (10<=487)
+      -> EXTERN: strtol ../../seq/matmul_seq.c (364,16)
+   -> INLINE: atoi ../../seq/matmul_seq.c (52,35) (10<=487)
+      -> EXTERN: strtol ../../seq/matmul_seq.c (364,16)
+   -> INLINE: atoi ../../seq/matmul_seq.c (53,35) (10<=487)
+      -> EXTERN: strtol ../../seq/matmul_seq.c (364,16)
+   -> DELETE: fprintf ../../seq/matmul_seq.c (54,32)
+   -> EXTERN: malloc ../../seq/matmul_seq.c (57,22)
+   -> EXTERN: malloc ../../seq/matmul_seq.c (58,22)
+   -> EXTERN: malloc ../../seq/matmul_seq.c (59,22)
+   -> EXTERN: fprintf ../../seq/matmul_seq.c (61,9)
+   -> EXTERN: malloc ../../seq/matmul_seq.c (69,21)
+   -> llvm.memset.p0.i64 ../../seq/matmul_seq.c (72,9)
+   -> INLINE: wtime ../../seq/matmul_seq.c (73,27) (45<=375)
+      -> EXTERN: clock_gettime ../../seq/matmul_seq.c (37,5)
+   -> INLINE: wtime ../../seq/matmul_seq.c (107,20) (-14955<=375)
+      -> EXTERN: clock_gettime ../../seq/matmul_seq.c (37,5)
+   -> EXTERN: qsort ../../seq/matmul_seq.c (119,5)
+   -> EXTERN: printf ../../seq/matmul_seq.c (124,5)
+   -> EXTERN: free ../../seq/matmul_seq.c (128,5)
+   -> EXTERN: free ../../seq/matmul_seq.c (128,14)
+   -> EXTERN: free ../../seq/matmul_seq.c (128,23)
+   -> EXTERN: free ../../seq/matmul_seq.c (128,32)
+   -> DELETE: llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> EXTERN: fwrite ../../seq/matmul_seq.c (54,32)
+   -> llvm.masked.gather.v8f64.v8p0 ../../seq/matmul_seq.c (102,54)
+   -> llvm.vector.reduce.fadd.v8f64 ../../seq/matmul_seq.c (102,45)
+   -> llvm.masked.gather.v8f64.v8p0 ../../seq/matmul_seq.c (89,42)
+   -> llvm.vector.reduce.fadd.v8f64 ../../seq/matmul_seq.c (89,33)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+   -> llvm.fabs.f64 ../../seq/matmul_seq.c (115,30)
+
+COMPILE FUNC: cmp_double
+
+---- End Inlining Report ------
